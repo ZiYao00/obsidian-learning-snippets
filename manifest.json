@@ -2,25 +2,28 @@
   "schema_version": 1,
   "repository": "https://github.com/ZiYao00/obsidian-learning-snippets",
   "core": {
-    "file": "snippets/learning-lab.css",
+    "name": "learning-lab",
+    "path": "snippets/learning-lab.css",
     "version": "0.3",
     "cssclasses": ["learning-page"],
-    "namespace": "--ll-*"
+    "tokens": ["--ll-*"]
   },
-  "extensions": {
-    "video-note": {
-      "file": "snippets/video-note.css",
+  "extensions": [
+    {
+      "name": "video-note",
+      "path": "snippets/video-note.css",
       "version": "0.2",
-      "requires_core": "0.3+",
+      "requires": ["learning-lab>=0.3"],
       "cssclasses": ["learning-page", "video-note"],
-      "namespace": "--vn-*"
+      "namespace": ["--vn-*", "video-note-*"]
     },
-    "github-note": {
-      "file": "snippets/github-note.css",
+    {
+      "name": "github-note",
+      "path": "snippets/github-note.css",
       "version": "0.1",
-      "requires_core": "0.3+",
+      "requires": ["learning-lab>=0.3"],
       "cssclasses": ["learning-page", "github-note"],
-      "namespace": "--gn-*"
+      "namespace": ["--gn-*", "github-note-*"]
     }
-  }
+  ]
 }

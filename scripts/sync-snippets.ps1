@@ -1,35 +1,40 @@
 param(
-    [Parameter(Mandatory = $true)]
-    [string]$VaultRoot
+  [Parameter(Mandatory = $true)]
+  [string]$VaultRoot
 )
 
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$source = Join-Path $repoRoot "snippets"
-$target = Join-Path $VaultRoot ".obsidian\snippets"
+$sourceRoot = Join-Path $repoRoot "snippets"
+$targetRoot = Join-Path $VaultRoot ".obsidian\snippets"
 
-if (-not (Test-Path $source -PathType Container)) {
-    throw "Snippet source directory not found: $source"
+if (-not (Test-Path -LiteralPath $VaultRoot -PathType Container)) {
+  throw "Vault root does not exist: $VaultRoot"
 }
 
-if (-not (Test-Path (Join-Path $VaultRoot ".obsidian") -PathType Container)) {
-    throw "The supplied VaultRoot does not contain .obsidian: $VaultRoot"
+$obsidianRoot = Join-Path $VaultRoot ".obsidian"
+if (-not (Test-Path -LiteralPath $obsidianRoot -PathType Container)) {
+  throw "The target does not look like an Obsidian Vault because .obsidian is missing: $VaultRoot"
 }
 
-if (-not (Test-Path $target -PathType Container)) {
-    New-Item -ItemType Directory -Path $target | Out-Null
-}
+New-Item -ItemType Directory -Force -Path $targetRoot | Out-Null
 
 $files = @(
-    "learning-lab.css",
-    "video-note.css",
-    "github-note.css"
+  "learning-lab.css",
+  "video-note.css",
+  "github-note.css"
 )
 
 foreach ($file in $files) {
-    Copy-Item -LiteralPath (Join-Path $source $file) -Destination (Join-Path $target $file) -Force
-    Write-Host "Synced $file"
+  $source = Join-Path $sourceRoot $file
+  if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
+    throw "Shared snippet is missing: $source"
+  }
+
+  Copy-Item -LiteralPath $source -Destination (Join-Path $targetRoot $file) -Force
+  Write-Host "Synced $file"
 }
 
-Write-Host "Done. Enable the required snippets in Obsidian Settings -> Appearance -> CSS snippets."
+Write-Host "Done: $targetRoot"
+Write-Host "Enable the required snippets in Obsidian: Settings -> Appearance -> CSS snippets."

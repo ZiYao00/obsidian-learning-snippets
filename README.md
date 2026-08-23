@@ -125,21 +125,35 @@ cssclasses:
 
 ## 推荐的 Vault 同步方式
 
-不建议把各项目的 `obsidian/snippets/` junction 到本仓库。
+不建议把各项目的 `obsidian/snippets/` junction 到本仓库，也不建议把整个 Vault 的 `.obsidian/snippets/` 长期做成 junction/symlink。
 
-推荐在 Vault 层统一安装。仓库提供：
+### 从旧 junction 迁移一次
 
-```text
-scripts/sync-snippets.ps1
+如果现有 Vault 的 `.obsidian/snippets/` 仍然是历史 junction/symlink，先运行：
+
+```powershell
+.\scripts\migrate-vault-snippets.ps1 -VaultRoot "D:\Notes\MyVault"
 ```
 
-示例：
+迁移脚本会：
+
+- 检测 `snippets` 是否是普通目录或 reparse point；
+- junction/symlink 场景下先备份当前顶层文件，再只解除链接对象；
+- 把 `snippets` 恢复为普通目录；
+- 保留未知的个人 CSS；
+- 从本仓库同步 `learning-lab.css`、`video-note.css`、`github-note.css`；
+- 用 SHA-256 验证备份和最终同步结果；
+- 把迁移备份放在 `.obsidian/snippets-migration-backup/<timestamp>/`，不会塞进 Obsidian 实际扫描的 `snippets/`。
+
+### 日常同步
+
+完成一次性迁移后，日常更新使用：
 
 ```powershell
 .\scripts\sync-snippets.ps1 -VaultRoot "D:\Notes\MyVault"
 ```
 
-脚本只把本仓库的 CSS 同步到 `<Vault>/.obsidian/snippets/`，不会要求各 consumer project 持有 CSS 副本。
+`sync-snippets.ps1` 只把本仓库的 CSS 同步到 `<Vault>/.obsidian/snippets/`。如果目标仍是 junction/symlink，它会拒绝写入并要求先运行迁移脚本，避免再次写穿到其它目录。
 
 ## 其它项目如何接入
 
@@ -196,6 +210,7 @@ obsidian-learning-snippets/
 │  ├─ ARCHITECTURE.md
 │  └─ CONSUMER-INTEGRATION.md
 ├─ scripts/
+│  ├─ migrate-vault-snippets.ps1
 │  └─ sync-snippets.ps1
 ├─ manifest.json
 ├─ AGENTS.md

@@ -80,6 +80,8 @@ Core 必须保持领域无关。
 - responsive rules；
 - `--ll-*` tokens。
 
+Core 只负责页面内边距和响应式安全边界，不负责接管 Obsidian 最终正文宽度。不要在 Core 中给 `.markdown-preview-sizer` 固定 `max-width`；正文宽度由 Obsidian、主题或 Editor Width Slider 一类宿主插件决定。这样共享样式不会与用户的阅读宽度控制形成双重约束。
+
 不应放入：
 
 - Bilibili player；

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2 - 2026-10-03
+
+Compatible layout update. No consumer `cssclasses`, shared class names, or Extension contract changed.
+
+- Stop the Core from hard-capping Obsidian's `.markdown-preview-sizer`, so Obsidian/theme/plugin width controls can own the final readable width.
+- Add conservative responsive bounds for embedded images and local video without forcing a fixed image height.
+- Put regular Reading/Live Preview table wrappers in charge of horizontal overflow and let wide tables expand inside their own scroll container.
+- Cap the Video Note Bilibili player at 960px on desktop while keeping narrow layouts responsive.
+- Add `sync-obsidian.bat` for one-click Windows sync while keeping the machine-local Vault path in ignored `config/vault.local.txt`.
+
 ## 0.1.1 - 2026-08-23
 
 Vault migration safety update.

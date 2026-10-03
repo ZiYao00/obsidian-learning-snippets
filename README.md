@@ -44,7 +44,7 @@ obsidian-learning-snippets
 Core 只负责通用设计语言：
 
 - `--ll-*` Design Tokens；
-- 页面宽度、排版与标题层级；
+- 页面内边距、排版与标题层级；最终正文宽度由 Obsidian、主题或宽度控制插件负责；
 - `lead / summary / meta / risk / resource` 语义 callout；
 - `grid-2 / grid-3 / grid-auto + card` 布局组件；
 - `.ll-badge / .ll-metric / .ll-note / .ll-chip-*` 微型 UI；
@@ -147,11 +147,25 @@ cssclasses:
 
 ### 日常同步
 
-完成一次性迁移后，日常更新使用：
+完成一次性迁移后，日常更新可以直接运行：
 
 ```powershell
 .\scripts\sync-snippets.ps1 -VaultRoot "D:\Notes\MyVault"
 ```
+
+Windows 也可以双击仓库根目录的：
+
+```text
+sync-obsidian.bat
+```
+
+BAT 会按以下顺序解析 Vault 路径：
+
+1. 命令行参数，例如 `sync-obsidian.bat "D:\Notes\MyVault"`；
+2. 本机私有文件 `config/vault.local.txt` 的第一行；
+3. 环境变量 `OBSIDIAN_VAULT`。
+
+`config/vault.local.txt` 已被 Git 忽略，适合保存本机 Vault 绝对路径，不会进入仓库历史。
 
 `sync-snippets.ps1` 只把本仓库的 CSS 同步到 `<Vault>/.obsidian/snippets/`。如果目标仍是 junction/symlink，它会拒绝写入并要求先运行迁移脚本，避免再次写穿到其它目录。
 

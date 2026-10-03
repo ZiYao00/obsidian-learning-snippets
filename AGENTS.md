@@ -14,6 +14,7 @@ This repository is the canonical source for shared Obsidian learning-note CSS.
 ## Core / Extension contract
 
 - `learning-lab.css` is the domain-agnostic Core and owns `--ll-*`, shared typography, semantic callouts, cards, grids, tables, and responsive behavior.
+- The Core may provide page padding and responsive layout, but it must not own the host application's final readable width. Do not hard-code `max-width` on Obsidian's `.markdown-preview-sizer`; let Obsidian, the active theme, or width-control plugins own that dimension.
 - Extensions must scope selectors with a combined class such as `.learning-page.video-note` or `.learning-page.github-note`.
 - Reuse `--ll-*` tokens before adding extension-specific tokens.
 - Extension-specific variables/classes must use their own namespace (`--vn-*`, `--gn-*`, etc.).

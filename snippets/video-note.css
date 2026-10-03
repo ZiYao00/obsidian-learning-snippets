@@ -8,6 +8,7 @@
 
 .learning-page.video-note {
   --vn-player-radius: var(--ll-radius-lg);
+  --vn-player-max-width: 960px;
   --vn-source-surface: var(--ll-surface-soft);
 }
 
@@ -42,7 +43,7 @@
 .learning-page.video-note iframe.video-note-player,
 .learning-page.video-note iframe[src*="player.bilibili.com"] {
   display: block;
-  width: 100%;
+  width: min(100%, var(--vn-player-max-width));
   aspect-ratio: 16 / 9;
   margin: 0.55rem 0 0.7rem;
   border: 1px solid var(--ll-border) !important;

@@ -25,9 +25,11 @@
 /* 00 — Core design tokens */
 
 .learning-page {
+  /* Legacy opt-in token kept for compatibility. Core no longer applies it. */
   --ll-content-max: 1120px;
   --ll-page-padding-inline: clamp(24px, 4vw, 64px);
   --ll-page-padding-inline-narrow: 18px;
+  --ll-video-max-height: min(68vh, 720px);
 
   --ll-radius-sm: 8px;
   --ll-radius-md: 12px;
@@ -54,7 +56,6 @@
 /* 10 — Page frame & typography */
 
 .learning-page .markdown-preview-sizer {
-  max-width: var(--ll-content-max);
   padding-inline: var(--ll-page-padding-inline);
   container-type: inline-size;
   container-name: learning-page;
@@ -372,16 +373,37 @@
   font-weight: 600;
 }
 
+/* 55 — Embedded media */
+
+.learning-page img:not(.emoji) {
+  max-width: 100%;
+  height: auto;
+}
+
+.learning-page video {
+  display: block;
+  max-width: 100%;
+  max-height: var(--ll-video-max-height);
+  object-fit: contain;
+}
+
 /* 60 — Data presentation */
 
+.learning-page .el-table,
+.learning-page .cm-table-widget > .table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
 .learning-page table {
-  width: 100%;
+  width: auto;
+  min-width: 100%;
   margin: 1rem 0 1.4rem;
   border: 1px solid var(--ll-border);
   border-radius: var(--ll-radius-md);
   border-collapse: separate;
   border-spacing: 0;
-  overflow: hidden;
   font-size: 0.9rem;
 }
 

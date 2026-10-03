@@ -2,3 +2,6 @@
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Machine-local Obsidian Vault target
+/config/vault.local.txt

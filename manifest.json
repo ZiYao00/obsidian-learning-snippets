@@ -28,7 +28,7 @@
     {
       "name": "x-case-note",
       "path": "snippets/x-case-note.css",
-      "version": "0.4",
+      "version": "0.5",
       "requires": ["learning-lab>=0.3"],
       "cssclasses": ["learning-page", "x-case-note"],
       "namespace": ["--xc-*", "x-case-*"]

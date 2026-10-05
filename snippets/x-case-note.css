@@ -1,5 +1,5 @@
 /*
- * X Case Note — Learning Lab Extension v0.4
+ * X Case Note — Learning Lab Extension v0.5
  * Requires: learning-lab.css Core v0.3+
  * Scope: notes with cssclasses: [learning-page, x-case-note]
  * Namespace: --xc-* / x-case-*
@@ -235,6 +235,15 @@
 .learning-page.x-case-note pre:has(code[class*="language-prompt"]) .copy-code-button:hover {
   opacity: 1;
   background: var(--background-modifier-hover);
+}
+
+/* ---------- File Explorer hygiene ---------- */
+
+/* Hide only X case media folders from Obsidian's File Explorer.
+ * The folders and files stay on disk and remain available to embeds/plugins.
+ */
+.nav-folder:has(> .nav-folder-title[data-path^="X案例库/"][data-path$="/media"]) {
+  display: none !important;
 }
 
 @media (max-width: 720px) {

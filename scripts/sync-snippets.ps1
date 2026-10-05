@@ -34,7 +34,8 @@ else {
 $files = @(
   "learning-lab.css",
   "video-note.css",
-  "github-note.css"
+  "github-note.css",
+  "x-case-note.css"
 )
 
 foreach ($file in $files) {

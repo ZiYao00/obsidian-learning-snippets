@@ -1,0 +1,246 @@
+/*
+ * X Case Note — Learning Lab Extension v0.4
+ * Requires: learning-lab.css Core v0.3+
+ * Scope: notes with cssclasses: [learning-page, x-case-note]
+ * Namespace: --xc-* / x-case-*
+ */
+
+.learning-page.x-case-note {
+  --xc-video-width: 280px;
+  --xc-video-max-height: 180px;
+  --xc-image-width: 220px;
+  --xc-image-max-height: 190px;
+  --xc-media-radius: var(--ll-radius-md);
+  --xc-thread-line: var(--background-modifier-border);
+  --xc-thread-dot: var(--interactive-accent);
+  --xc-thread-muted: var(--text-muted);
+  --xc-prompt-bg: var(--background-secondary);
+  --xc-prompt-head-bg: var(--background-secondary-alt);
+  --xc-prompt-border: var(--background-modifier-border);
+}
+
+/* ---------- Compact native media fallback ---------- */
+
+.learning-page.x-case-note video,
+.learning-page.x-case-note .internal-embed[src$=".mp4"],
+.learning-page.x-case-note .internal-embed[src*=".mp4?"] {
+  display: inline-block;
+  width: min(100%, var(--xc-video-width));
+  max-width: var(--xc-video-width);
+  margin: 0.25rem 0.55rem 0.65rem 0;
+  vertical-align: top;
+}
+
+.learning-page.x-case-note video {
+  height: auto;
+  max-height: var(--xc-video-max-height);
+  object-fit: contain;
+  border: 1px solid var(--xc-prompt-border);
+  border-radius: var(--xc-media-radius);
+  background: #000;
+}
+
+.learning-page.x-case-note .image-embed,
+.learning-page.x-case-note .internal-embed.image-embed {
+  display: inline-block;
+  width: auto;
+  max-width: var(--xc-image-width);
+  margin: 0.25rem 0.55rem 0.65rem 0;
+  vertical-align: top;
+}
+
+.learning-page.x-case-note .image-embed img,
+.learning-page.x-case-note .internal-embed.image-embed img {
+  display: block;
+  width: auto;
+  max-width: var(--xc-image-width);
+  max-height: var(--xc-image-max-height);
+  object-fit: contain;
+  border: 1px solid var(--xc-prompt-border);
+  border-radius: var(--xc-media-radius);
+  background: var(--background-secondary);
+  cursor: zoom-in;
+}
+
+/* ---------- Author thread: messenger-like timeline ---------- */
+
+.learning-page.x-case-note .callout[data-callout="x-post"],
+.learning-page.x-case-note .callout[data-callout="x-reply"] {
+  position: relative;
+  margin: 0 0 0.2rem 1.05rem;
+  padding: 0.1rem 0 0.8rem 1rem;
+  overflow: visible;
+  border: 0;
+  border-left: 1px solid var(--xc-thread-line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"]::before,
+.learning-page.x-case-note .callout[data-callout="x-reply"]::before {
+  content: "";
+  position: absolute;
+  top: 0.52rem;
+  left: -5px;
+  box-sizing: border-box;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--background-primary);
+  border-radius: 50%;
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"]::before {
+  background: var(--xc-thread-dot);
+}
+
+.learning-page.x-case-note .callout[data-callout="x-reply"]::before {
+  border-color: var(--xc-thread-muted);
+  background: var(--background-primary);
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-title,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-title {
+  min-height: 1.35rem;
+  margin: 0 0 0.18rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-interface);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-title .callout-icon,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-title .callout-icon,
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-title .callout-fold,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-title .callout-fold {
+  display: none;
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-content,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-content {
+  padding: 0;
+  font-family: var(--font-text);
+  font-size: 0.92rem;
+  line-height: 1.58;
+  color: var(--text-normal);
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-content > :first-child,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-content > :first-child {
+  margin-top: 0;
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-content > :last-child,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Derived Chinese translation under author text ---------- */
+
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-content > blockquote,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-content > blockquote {
+  margin: 0.5rem 0 0.15rem;
+  padding: 0.15rem 0 0.15rem 0.72rem;
+  border-left: 2px solid var(--xc-thread-line);
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.learning-page.x-case-note .callout[data-callout="x-post"] > .callout-content > blockquote p,
+.learning-page.x-case-note .callout[data-callout="x-reply"] > .callout-content > blockquote p {
+  margin: 0.1rem 0;
+}
+
+/* ---------- Prompt block attached to a message ---------- */
+
+.learning-page.x-case-note pre:has(code.language-prompt),
+.learning-page.x-case-note pre:has(code[class*="language-prompt"]) {
+  position: relative;
+  margin: 0.45rem 0 0.2rem;
+  padding: 2.45rem 0.9rem 0.9rem;
+  overflow: hidden;
+  border: 1px solid var(--xc-prompt-border);
+  border-radius: var(--ll-radius-md);
+  background: var(--xc-prompt-bg);
+  box-shadow: none;
+}
+
+.learning-page.x-case-note pre:has(code.language-prompt)::before,
+.learning-page.x-case-note pre:has(code[class*="language-prompt"])::before {
+  content: "PROMPT";
+  position: absolute;
+  inset: 0 0 auto 0;
+  box-sizing: border-box;
+  height: 1.9rem;
+  padding: 0.4rem 0.68rem;
+  border-bottom: 1px solid var(--xc-prompt-border);
+  background: var(--xc-prompt-head-bg);
+  font-family: var(--font-monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.learning-page.x-case-note pre code.language-prompt,
+.learning-page.x-case-note pre code[class*="language-prompt"] {
+  display: block;
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.45rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.55;
+  tab-size: 2;
+  scrollbar-gutter: stable;
+}
+
+.learning-page.x-case-note pre:has(code.language-prompt) .copy-code-button,
+.learning-page.x-case-note pre:has(code[class*="language-prompt"]) .copy-code-button {
+  top: 0.24rem;
+  right: 0.4rem;
+  z-index: 2;
+  width: 1.55rem;
+  min-width: 1.55rem;
+  height: 1.4rem;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--xc-prompt-border);
+  border-radius: 5px;
+  background: var(--background-primary);
+  color: transparent;
+  font-size: 0;
+  opacity: 0.78;
+}
+
+.learning-page.x-case-note pre:has(code.language-prompt) .copy-code-button::before,
+.learning-page.x-case-note pre:has(code[class*="language-prompt"]) .copy-code-button::before {
+  content: "⧉";
+  display: block;
+  color: var(--text-muted);
+  font-family: var(--font-interface);
+  font-size: 0.88rem;
+  line-height: 1.3rem;
+  text-align: center;
+}
+
+.learning-page.x-case-note pre:has(code.language-prompt) .copy-code-button:hover,
+.learning-page.x-case-note pre:has(code[class*="language-prompt"]) .copy-code-button:hover {
+  opacity: 1;
+  background: var(--background-modifier-hover);
+}
+
+@media (max-width: 720px) {
+  .learning-page.x-case-note .callout[data-callout="x-post"],
+  .learning-page.x-case-note .callout[data-callout="x-reply"] {
+    margin-left: 0.7rem;
+    padding-left: 0.8rem;
+  }
+}

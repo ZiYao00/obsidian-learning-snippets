@@ -24,6 +24,14 @@
       "requires": ["learning-lab>=0.3"],
       "cssclasses": ["learning-page", "github-note"],
       "namespace": ["--gn-*", "github-note-*"]
+    },
+    {
+      "name": "x-case-note",
+      "path": "snippets/x-case-note.css",
+      "version": "0.4",
+      "requires": ["learning-lab>=0.3"],
+      "cssclasses": ["learning-page", "x-case-note"],
+      "namespace": ["--xc-*", "x-case-*"]
     }
   ]
 }

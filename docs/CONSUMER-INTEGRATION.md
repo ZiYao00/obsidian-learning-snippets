@@ -143,6 +143,39 @@ obsidian/snippets/github-note.css
 
 如果未来该项目出现自己的领域 Extension，再单独加入 `extensions`，不要把项目专属规则直接塞进 Core。
 
+## x-case-library
+
+建议配置：
+
+```json
+{
+  "schema_version": 1,
+  "repository": "https://github.com/ZiYao00/obsidian-learning-snippets",
+  "core": "snippets/learning-lab.css",
+  "extensions": ["snippets/x-case-note.css"],
+  "cssclasses": ["learning-page", "x-case-note"]
+}
+```
+
+笔记必须生成：
+
+```yaml
+cssclasses:
+  - learning-page
+  - x-case-note
+```
+
+`x-case-note.css` 当前负责：
+
+- Media Viewer Gallery 已通过本地 MP4 弹窗实测，X 案例默认使用 `size: small` 小缩略图；
+- 原生 MP4 fallback 约 280px，图片 fallback 约 220px；
+- 作者主帖 / 作者回复使用轻量聊天时间线：主帖实心圆、回复空心圆；
+- 非中文作者普通正文保留原文，并在下方追加轻量中文翻译；
+- Prompt 直接挂在对应消息下面，不再单独建立 Prompt 区；
+- Prompt 使用 `prompt` fenced block，顶部显示 PROMPT 标题栏并复用 Obsidian 原生复制按钮；
+- 长 Prompt 最大显示高度 320px，正文区内部滚动，标题栏与复制按钮保持固定；
+- X 案例专属视觉，不污染 Core 或其它学习项目。
+
 ## README 推荐声明
 
 Consumer project 的 README 建议加入：

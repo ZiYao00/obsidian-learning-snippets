@@ -174,7 +174,7 @@ cssclasses:
 - Prompt 直接挂在对应消息下面，不再单独建立 Prompt 区；
 - Prompt 使用 `prompt` fenced block，顶部显示 PROMPT 标题栏并复用 Obsidian 原生复制按钮；
 - 长 Prompt 最大显示高度 320px，正文区内部滚动，标题栏与复制按钮保持固定；
-- 在 Obsidian File Explorer 中隐藏 `X案例库/**/media` 目录，但不影响磁盘文件、Gallery 或视频弹窗；
+- 在 Obsidian File Explorer 中隐藏 `X案例库/**/media` 目录和各案例的 `source.json`，但不删除磁盘数据，也不影响采集、修复、Gallery 或视频弹窗；
 - X 案例专属视觉，不污染 Core 或其它学习项目。
 
 ## README 推荐声明

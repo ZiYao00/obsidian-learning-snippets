@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3 - 2026-10-06
+
+X-case File Explorer hygiene update. No consumer `cssclasses` or shared Core contract changed.
+
+- Upgrade `x-case-note.css` to v0.6.
+- Keep `source.json` as the on-disk factual source of truth while hiding it from Obsidian File Explorer under `X案例库/**`.
+- Continue hiding physical X-case `media/` directories without affecting Gallery, media playback, collection, validation, repair, or filesystem access.
+
 ## 0.1.2 - 2026-10-03
 
 Compatible layout update. No consumer `cssclasses`, shared class names, or Extension contract changed.

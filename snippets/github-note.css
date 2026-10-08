@@ -1,5 +1,5 @@
 /*
- * GitHub Note — Learning Lab Extension v0.1
+ * GitHub Note — Learning Lab Extension v0.2
  * Requires: learning-lab.css Core v0.3+
  * Scope: notes with cssclasses: [learning-page, github-note]
  * Namespace: --gn-* / github-note-*
@@ -8,6 +8,16 @@
 
 .learning-page.github-note {
   --gn-meta-gap: 0.55rem;
+}
+
+/* ---------- File Explorer hygiene (GitHub Note reading layer only) ---------- */
+
+/* Hide the implementation-data root, not its files on disk.
+ * Keep images available to normal Obsidian WikiLinks and plugins.
+ * This selector only affects the File Explorer tree, never note content.
+ */
+.nav-folder:has(> .nav-folder-title[data-path="GitHub-Note/_repo-data"]) {
+  display: none !important;
 }
 
 /* ---------- Compact repository header ---------- */

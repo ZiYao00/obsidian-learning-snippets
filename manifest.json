@@ -20,7 +20,7 @@
     {
       "name": "github-note",
       "path": "snippets/github-note.css",
-      "version": "0.1",
+      "version": "0.2",
       "requires": ["learning-lab>=0.3"],
       "cssclasses": ["learning-page", "github-note"],
       "namespace": ["--gn-*", "github-note-*"]

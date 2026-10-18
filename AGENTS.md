@@ -8,7 +8,7 @@ This repository is the canonical source for shared Obsidian learning-note CSS.
 
 - Treat `snippets/` as the only editable source of shared CSS.
 - Do not copy consumer-project CSS back into this repository unless it is intentionally promoted into a shared Core or Extension.
-- Do not hardcode personal Vault paths or local workspace paths in committed files.
+- Do not hardcode personal Vault paths, sibling repository names, or local workspace paths in committed files. Consumer code reads its tracked `config/obsidian-style.json`; maintenance tools that require a local provider checkout use an explicit path or `OBSIDIAN_STYLES_ROOT`. GitHub URL is provider identity, not a filesystem path.
 - Consumer repositories should reference this repository; they should not keep tracked duplicate copies of shared snippets.
 
 ## Core / Extension contract
@@ -28,7 +28,7 @@ When changing an Extension, preserve its declared `cssclasses` contract unless t
 
 ## Vault runtime safety
 
-- Treat the Vault `.obsidian/snippets/` directory as a runtime/install layer, not a second source of truth.
+- Treat the Vault `.obsidian/snippets/` directory as a runtime/install layer, not a second source of truth. The private Vault-only `vault-local.css` is user-owned: never copy, delete, rename, or overwrite it from this repository.
 - Do not create a permanent Vault-level junction/symlink to this repository. Use `scripts/migrate-vault-snippets.ps1` once for legacy links, then `scripts/sync-snippets.ps1` for normal updates.
 - Migration must preserve unknown personal CSS and must not delete or mutate the reparse-point Target directory.
 - Keep migration backups outside the active `snippets/` directory so Obsidian does not scan backup CSS.

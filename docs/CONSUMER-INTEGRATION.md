@@ -127,6 +127,8 @@ obsidian/snippets/github-note.css
 
 迁移完成后不应继续作为项目自己的 CSS 真源。
 
+**GitHub Note 数据目录隐藏（Extension v0.2）：** `github-note.css` 只在 Obsidian File Explorer 隐藏 `GitHub-Note/_repo-data` 文件夹；不删除文件，不影响 Markdown WikiLink、图片与其它内容的读取。此规则由共享 CSS 仓库维护，消费者不得在 Core 或另一个私有 CSS 文件中复制。同一 Vault 只需更新并启用 `github-note` 代码片段。默认待整理目录使用 `00-待整理`，不改动已经存在的正式笔记位置。
+
 ## ComfyUI-Learning-Lab
 
 如果某一批笔记只使用通用 Core：
@@ -174,7 +176,7 @@ cssclasses:
 - Prompt 直接挂在对应消息下面，不再单独建立 Prompt 区；
 - Prompt 使用 `prompt` fenced block，顶部显示 PROMPT 标题栏并复用 Obsidian 原生复制按钮；
 - 长 Prompt 最大显示高度 320px，正文区内部滚动，标题栏与复制按钮保持固定；
-- 在 Obsidian File Explorer 中隐藏 `X案例库/**/media` 目录和各案例的 `source.json`，但不删除磁盘数据，也不影响采集、修复、Gallery 或视频弹窗；
+- 在 Obsidian File Explorer 中隐藏 Layout V2 的 `X案例库/_case-data` 数据根目录；迁移期间继续兼容隐藏旧 Layout V1 的 `X案例库/**/media` 与各案例 `source.json`，但不删除磁盘数据，也不影响采集、修复、Gallery 或视频弹窗；
 - X 案例专属视觉，不污染 Core 或其它学习项目。
 
 ## README 推荐声明
@@ -211,6 +213,14 @@ Do not copy, regenerate, fork, or independently modify shared Core/Extension CSS
 ```
 
 这条对 Codex / Claude / Hermes 很重要：它能防止 Agent 看到样式需求后，又在 consumer project 内生成一份新的 `learning-lab.css`。
+
+## 禁止消费端硬编码本地共享仓库目录
+
+- `config/obsidian-style.json` 中的 `repository` 是远端仓库身份（GitHub URL），不是本地路径；`core`、`extensions` 是共享仓库内部相对路径。
+- 笔记采集、Markdown 生成、Doctor 仅用 Consumer 契约和 Vault 中已安装的 CSS，无需定位共享仓库源码。
+- 只有专项视觉 QA、维护及源码对比需要本地共享仓库时，才显式传入 `--styles-root "<共享仓库目录>"` 或环境变量 `OBSIDIAN_STYLES_ROOT`，**不要使用 `ROOT.parent / "obsidian-learning-snippets"`**。
+- 仓库重命名或移动后，维护工具只需更新参数或环境变量；远端仓库改名则更新各 Consumer 配置中的 `repository` 地址。
+- 公共 CSS 不包含个人 Vault 根目录、特定笔记路径或专用私有资源隐藏规则；这些规则由 Vault 自有 `vault-local.css` 管理。
 
 ## Vault 安装
 

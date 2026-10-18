@@ -28,7 +28,7 @@ if not defined VAULT_ROOT (
   exit /b 2
 )
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%REPO_ROOT%scripts\sync-snippets.ps1" -VaultRoot "%VAULT_ROOT%"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%REPO_ROOT%scripts\sync-snippets.ps1" -VaultRoot "%VAULT_ROOT%" -Apply
 set "SYNC_EXIT=%ERRORLEVEL%"
 
 if not "%SYNC_EXIT%"=="0" (

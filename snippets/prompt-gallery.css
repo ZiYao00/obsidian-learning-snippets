@@ -1,0 +1,88 @@
+/*
+ * StartAI Prompt Gallery — Learning Lab Extension v0.1
+ * Requires: learning-lab.css Core v0.3+
+ * Scope: cssclasses: [learning-page, prompt-gallery]
+ * Layout: image left, prompt right; stack at narrow note widths.
+ */
+.learning-page.prompt-gallery {
+  --pg-border: var(--ll-border, var(--background-modifier-border));
+  --pg-surface: var(--ll-surface-soft, var(--background-secondary));
+  --pg-gap: 1.1rem;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] {
+  margin: .65rem 0 1.5rem;
+  padding: .85rem 1rem 1rem;
+  border: 1px solid var(--pg-border);
+  border-radius: var(--ll-radius-md, 12px);
+  background: var(--pg-surface);
+  box-shadow: none;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-title {
+  color: var(--text-muted);
+  font-size: .78rem;
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-title .callout-icon {
+  display: none;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content {
+  display: grid;
+  grid-template-columns: minmax(0, 44%) minmax(0, 1fr);
+  gap: .5rem var(--pg-gap);
+  align-items: start;
+  min-width: 0;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content > :first-child {
+  grid-row: 1 / span 20;
+  grid-column: 1;
+  margin: 0;
+  min-width: 0;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content > :not(:first-child) {
+  grid-column: 2;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  line-height: 1.65;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] .image-embed,
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] .internal-embed.image-embed {
+  display: block;
+  max-width: 100%;
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] .image-embed img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 460px;
+  object-fit: contain;
+  border: 1px solid var(--pg-border);
+  border-radius: var(--ll-radius-sm, 8px);
+}
+.learning-page.prompt-gallery .callout[data-callout="prompt-pair"] strong {
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+@container learning-page (max-width: 680px) {
+  .learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content {
+    grid-template-columns: 1fr;
+  }
+  .learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content > :first-child,
+  .learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content > :not(:first-child) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+@media (max-width: 720px) {
+  .learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content {
+    grid-template-columns: 1fr;
+  }
+  .learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content > :first-child,
+  .learning-page.prompt-gallery .callout[data-callout="prompt-pair"] > .callout-content > :not(:first-child) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+

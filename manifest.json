@@ -20,7 +20,7 @@
     {
       "name": "github-note",
       "path": "snippets/github-note.css",
-      "version": "0.2",
+      "version": "0.4",
       "requires": ["learning-lab>=0.3"],
       "cssclasses": ["learning-page", "github-note"],
       "namespace": ["--gn-*", "github-note-*"]
@@ -28,10 +28,18 @@
     {
       "name": "x-case-note",
       "path": "snippets/x-case-note.css",
-      "version": "0.6",
+      "version": "0.7",
       "requires": ["learning-lab>=0.3"],
       "cssclasses": ["learning-page", "x-case-note"],
       "namespace": ["--xc-*", "x-case-*"]
+    },
+    {
+      "name": "prompt-gallery",
+      "path": "snippets/prompt-gallery.css",
+      "version": "0.1",
+      "requires": ["learning-lab>=0.3"],
+      "cssclasses": ["learning-page", "prompt-gallery"],
+      "namespace": ["--pg-*", "prompt-gallery-*"]
     }
   ]
 }

@@ -1,5 +1,26 @@
 # Changelog
 
+## Unreleased — GitHub Note v0.4 source/prompt presentation
+
+- Add optional `gh-source` source-attributed, quote-first callout and `prompt` fenced-code presentation inspired by X-case, with independent `--gn-*` tokens and selectors.
+- Preserve original source text; show a translation only as a separately labeled quote. Bound long Prompt display at 320px while retaining Obsidian's native copy control.
+- No changes to `x-case-note.css`, Learning Lab Core or repository Capture Note identity; the shared CSS does not introduce JavaScript copying or gallery dependencies.
+
+
+## Unreleased — GitHub Note File Explorer cleanup
+
+- Upgrade `github-note.css` to v0.2. Hide only the `GitHub-Note/_repo-data` root in Obsidian File Explorer using the same pattern as X-case storage separation.
+- Keep media, manifests and WikiLinks available on disk; no changes to shared Core, note CSS classes or unrelated CSS snippets.
+
+
+## 0.1.4 - 2026-10-06
+
+X-case Layout V2 compatibility update. No consumer `cssclasses` or shared Core contract changed.
+
+- Upgrade `x-case-note.css` to v0.7.
+- Hide the new `X案例库/_case-data` source/media root from Obsidian File Explorer while keeping files available to embeds, plugins, repair, and filesystem tools.
+- Keep the legacy per-case `media/` and `source.json` hiding selectors during the staged migration from Layout V1.
+
 ## 0.1.3 - 2026-10-06
 
 X-case File Explorer hygiene update. No consumer `cssclasses` or shared Core contract changed.

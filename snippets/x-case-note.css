@@ -1,5 +1,5 @@
 /*
- * X Case Note — Learning Lab Extension v0.6
+ * X Case Note — Learning Lab Extension v0.7
  * Requires: learning-lab.css Core v0.3+
  * Scope: notes with cssclasses: [learning-page, x-case-note]
  * Namespace: --xc-* / x-case-*
@@ -241,8 +241,13 @@
 
 /* Hide X-case implementation details from Obsidian's File Explorer only.
  * The folders/files stay on disk and remain available to the case workflow,
- * embeds and plugins.
+ * embeds and plugins. Layout V2 keeps all source/media packages under one
+ * hidden _case-data root; the legacy selectors remain during migration.
  */
+.nav-folder:has(> .nav-folder-title[data-path="X案例库/_case-data"]) {
+  display: none !important;
+}
+
 .nav-folder:has(> .nav-folder-title[data-path^="X案例库/"][data-path$="/media"]) {
   display: none !important;
 }

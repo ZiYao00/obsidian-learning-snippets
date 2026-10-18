@@ -1,5 +1,5 @@
 /*
- * GitHub Note — Learning Lab Extension v0.2
+ * GitHub Note — Learning Lab Extension v0.4
  * Requires: learning-lab.css Core v0.3+
  * Scope: notes with cssclasses: [learning-page, github-note]
  * Namespace: --gn-* / github-note-*
@@ -7,7 +7,14 @@
  */
 
 .learning-page.github-note {
-  --gn-meta-gap: 0.55rem;
+  --gn-meta-gap: 0.72rem;
+  --gn-section-accent: var(--interactive-accent);
+  --gn-subtle-border: var(--ll-border, var(--background-modifier-border));
+  --gn-source-rail: var(--background-modifier-border);
+  --gn-source-dot: var(--interactive-accent);
+  --gn-prompt-bg: var(--background-secondary);
+  --gn-prompt-head-bg: var(--background-secondary-alt, var(--background-secondary));
+  --gn-prompt-border: var(--background-modifier-border);
 }
 
 /* ---------- File Explorer hygiene (GitHub Note reading layer only) ---------- */
@@ -20,26 +27,295 @@
   display: none !important;
 }
 
-/* ---------- Compact repository header ---------- */
+/* ---------- Editorial reading: hierarchy, rhythm, theme ---------- */
 
+/* Deliberately do not set .markdown-preview-sizer max-width.
+ * The Vault's theme/reading-width plugin remains the width authority.
+ */
 .learning-page.github-note h1 {
   max-width: 52ch;
-  margin-bottom: 0.18rem;
-  font-size: clamp(1.3rem, 1.8vw, 1.55rem);
-  font-weight: 680;
-  line-height: 1.22;
-  letter-spacing: -0.018em;
+  margin: 0.4em 0 0.38em;
+  font-size: clamp(1.68rem, 2.3vw, 2.05rem);
+  font-weight: 720;
+  line-height: 1.26;
+  letter-spacing: -0.022em;
+  overflow-wrap: break-word;
 }
 
 .learning-page.github-note .github-note-meta {
   display: block;
-  margin: 0.1rem 0 var(--gn-meta-gap);
-  color: var(--ll-muted);
-  font-size: 0.8rem;
-  line-height: 1.45;
+  margin: 0.12rem 0 var(--gn-meta-gap);
+  color: var(--ll-muted, var(--text-muted));
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
-/* ---------- Dense source-driven sections ---------- */
+.learning-page.github-note h2 {
+  position: relative;
+  margin: 2.05em 0 0.78em;
+  padding: 0 0 0.56em 0.74em;
+  border-bottom: 1px solid var(--gn-subtle-border);
+  font-size: clamp(1.15rem, 1.75vw, 1.36rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+}
+
+.learning-page.github-note h2::before {
+  content: "";
+  position: absolute;
+  top: 0.16em;
+  bottom: 0.6em;
+  left: 0;
+  width: 3px;
+  border-radius: var(--ll-radius-sm, 8px);
+  background: var(--gn-section-accent);
+  opacity: 0.72;
+}
+
+.learning-page.github-note h3 {
+  margin: 1.6em 0 0.58em;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  font-weight: 680;
+}
+
+.learning-page.github-note p,
+.learning-page.github-note li {
+  line-height: 1.76;
+}
+
+.learning-page.github-note p {
+  margin-block: 0.82em;
+}
+
+.learning-page.github-note ul,
+.learning-page.github-note ol {
+  margin-block: 0.78em 1.08em;
+}
+
+.learning-page.github-note li + li {
+  margin-top: 0.34em;
+}
+
+.learning-page.github-note ul li::marker {
+  color: var(--gn-section-accent);
+}
+
+.learning-page.github-note li > strong:first-child,
+.learning-page.github-note li > p > strong:first-child {
+  font-weight: 700;
+}
+
+/* A native Markdown list stays a list: no forced cards or extra markup. */
+.learning-page.github-note .image-embed img {
+  max-width: 100%;
+  max-height: min(42vh, 360px);
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--ll-radius-sm, 8px);
+}
+
+.learning-page.github-note a,
+.learning-page.github-note :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+
+.learning-page.github-note :not(pre) > code {
+  padding: 0.1em 0.3em;
+  border: 1px solid var(--gn-subtle-border);
+  border-radius: 5px;
+  background: var(--ll-surface-soft, var(--background-secondary));
+  font-size: 0.9em;
+}
+
+.learning-page.github-note blockquote:not(.callout) {
+  margin: 1.05em 0;
+  padding: 0.5em 1em;
+  border-left: 3px solid var(--gn-subtle-border);
+  background: var(--ll-surface-soft, var(--background-secondary));
+}
+
+.learning-page.github-note hr {
+  margin-block: 2.25rem 1.45rem;
+  border-top-color: var(--gn-subtle-border);
+}
+
+.learning-page.github-note small {
+  color: var(--ll-muted, var(--text-muted));
+  font-size: 0.88em;
+  line-height: 1.55;
+}
+
+/* ---------- Source-attributed quotation (not an X message thread) ---------- */
+
+/* Only explicit [!gh-source] callouts receive the quiet quote timeline. */
+.learning-page.github-note .callout[data-callout="gh-source"] {
+  position: relative;
+  margin: 1.05rem 0 1.2rem 1rem;
+  padding: 0.12rem 0 0.65rem 1rem;
+  overflow: visible;
+  border: 0;
+  border-left: 1px solid var(--gn-source-rail);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.learning-page.github-note .callout[data-callout="gh-source"]::before {
+  content: "";
+  position: absolute;
+  top: 0.56rem;
+  left: -5px;
+  box-sizing: border-box;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--background-primary);
+  border-radius: 50%;
+  background: var(--gn-source-dot);
+}
+
+.learning-page.github-note .callout[data-callout="gh-source"] > .callout-title {
+  min-height: 1.35rem;
+  margin: 0 0 0.22rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-interface);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.learning-page.github-note .callout[data-callout="gh-source"] > .callout-title .callout-icon {
+  display: none;
+}
+
+/* Keep native fold controls visible when an author explicitly uses a foldable callout. */
+.learning-page.github-note .callout[data-callout="gh-source"] > .callout-content {
+  padding: 0;
+  color: var(--text-normal);
+  font-family: var(--font-text);
+  font-size: 0.96rem;
+  line-height: 1.67;
+}
+
+.learning-page.github-note .callout[data-callout="gh-source"] > .callout-content > :first-child {
+  margin-top: 0;
+}
+
+.learning-page.github-note .callout[data-callout="gh-source"] > .callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* Optional human translation nested under the original, never mixed into the quote. */
+.learning-page.github-note .callout[data-callout="gh-source"] > .callout-content > blockquote {
+  margin: 0.62rem 0 0.22rem;
+  padding: 0.18rem 0 0.18rem 0.82rem;
+  border-left: 2px solid var(--gn-source-rail);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.9em;
+  line-height: 1.62;
+}
+
+.learning-page.github-note .callout[data-callout="gh-source"] > .callout-content > blockquote p {
+  margin-block: 0.15rem;
+}
+
+/* ---------- Copy-ready original Prompt (only explicit language-prompt fences) ---------- */
+
+.learning-page.github-note pre:has(code.language-prompt),
+.learning-page.github-note pre:has(code[class*="language-prompt"]) {
+  position: relative;
+  margin: 0.8rem 0 1.05rem;
+  padding: 2.48rem 0.9rem 0.9rem;
+  overflow: hidden;
+  border: 1px solid var(--gn-prompt-border);
+  border-radius: var(--ll-radius-md, 10px);
+  background: var(--gn-prompt-bg);
+  box-shadow: none;
+}
+
+.learning-page.github-note pre:has(code.language-prompt)::before,
+.learning-page.github-note pre:has(code[class*="language-prompt"])::before {
+  content: "PROMPT";
+  position: absolute;
+  inset: 0 0 auto;
+  box-sizing: border-box;
+  height: 1.94rem;
+  padding: 0.42rem 0.72rem;
+  border-bottom: 1px solid var(--gn-prompt-border);
+  background: var(--gn-prompt-head-bg);
+  font-family: var(--font-monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+  line-height: 1.1rem;
+  color: var(--text-muted);
+}
+
+.learning-page.github-note pre code.language-prompt,
+.learning-page.github-note pre code[class*="language-prompt"] {
+  display: block;
+  max-height: 320px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 0.55rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.58;
+  tab-size: 2;
+  scrollbar-gutter: stable;
+}
+
+/* Obsidian provides the actual copy action; CSS only positions its native button. */
+.learning-page.github-note pre:has(code.language-prompt) .copy-code-button,
+.learning-page.github-note pre:has(code[class*="language-prompt"]) .copy-code-button {
+  top: 0.26rem;
+  right: 0.46rem;
+  z-index: 2;
+  min-width: 1.75rem;
+  height: 1.44rem;
+  padding: 0.1rem 0.24rem;
+  border: 1px solid var(--gn-prompt-border);
+  border-radius: 5px;
+  background: var(--background-primary);
+  color: transparent;
+  font-size: 0;
+  opacity: 0.86;
+  cursor: pointer;
+}
+
+.learning-page.github-note pre:has(code.language-prompt) .copy-code-button::before,
+.learning-page.github-note pre:has(code[class*="language-prompt"]) .copy-code-button::before {
+  content: "⧉";
+  display: block;
+  color: var(--text-muted);
+  font-family: var(--font-interface);
+  font-size: 0.94rem;
+  line-height: 1.1rem;
+  text-align: center;
+}
+
+.learning-page.github-note pre:has(code.language-prompt) .copy-code-button:hover,
+.learning-page.github-note pre:has(code[class*="language-prompt"]) .copy-code-button:hover,
+.learning-page.github-note pre:has(code.language-prompt) .copy-code-button:focus-visible,
+.learning-page.github-note pre:has(code[class*="language-prompt"]) .copy-code-button:focus-visible {
+  opacity: 1;
+  background: var(--background-modifier-hover);
+}
+
+.learning-page.github-note pre:has(code.language-prompt) .copy-code-button:focus-visible,
+.learning-page.github-note pre:has(code[class*="language-prompt"]) .copy-code-button:focus-visible {
+  outline: 2px solid var(--gn-source-dot);
+  outline-offset: 2px;
+}
+
+/* ---------- Existing source and risk callouts ---------- */
 
 .learning-page.github-note .callout[data-callout="summary"] {
   margin-top: 0.7rem;
@@ -62,6 +338,30 @@
 @media (max-width: 720px) {
   .learning-page.github-note h1 {
     max-width: none;
-    font-size: clamp(1.2rem, 5vw, 1.42rem);
+    font-size: clamp(1.45rem, 5.2vw, 1.78rem);
+    line-height: 1.32;
+  }
+
+  .learning-page.github-note h2 {
+    margin-top: 1.82em;
+    font-size: 1.16rem;
+  }
+
+  .learning-page.github-note h3 {
+    margin-top: 1.45em;
+  }
+
+  .learning-page.github-note .image-embed img {
+    max-height: min(36vh, 300px);
+  }
+
+  .learning-page.github-note .callout[data-callout="gh-source"] {
+    margin-left: 0.7rem;
+    padding-left: 0.85rem;
+  }
+
+  .learning-page.github-note pre:has(code.language-prompt),
+  .learning-page.github-note pre:has(code[class*="language-prompt"]) {
+    padding-inline: 0.75rem;
   }
 }

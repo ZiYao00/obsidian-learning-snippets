@@ -1,3 +1,7 @@
+# Python CSS QA runtime byproducts
+__pycache__/
+*.pyc
+
 # Operating-system metadata
 .DS_Store
 Thumbs.db
